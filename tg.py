@@ -1,13 +1,38 @@
 import random
 
 def math_task():
-    szam1 = random.randint(1, 20)
-    szam2 = random.randint(1, 20)
-    bekert = input(f"Mennyi {szam1} + {szam2}? ")
-    if int(bekert) == szam1 + szam2:
-        print("Ez az, helyes valasz!")
+    print("Valassz nehezseget:")
+    print("1. Konnyu (osszeadas)")
+    print("2. Kozep (szorzas)")
+    print("3. Nehez (gyokszamitas)")
+    szint = input("Nehezseg (1-3): ")
+    
+    if szint == "1":
+        szam1 = random.randint(1, 20)
+        szam2 = random.randint(1, 20)
+        bekert = input(f"Mennyi {szam1} + {szam2}? ")
+        if int(bekert) == szam1 + szam2:
+            print("Ez az, helyes valasz!")
+        else:
+            print("Nem jo, ezt meg kell meg gyakorolni.")
+    elif szint == "2":
+        szam1 = random.randint(2, 10)
+        szam2 = random.randint(2, 10)
+        bekert = input(f"Mennyi {szam1} * {szam2}? ")
+        if int(bekert) == szam1 * szam2:
+            print("Ez az, helyes valasz!")
+        else:
+            print("Nem jo, ezt meg kell meg gyakorolni.")
+    elif szint == "3":
+        szam1 = random.randint(1, 100)
+        eredmeny = int(szam1 ** 0.5)
+        bekert = input(f"Mennyi a gyoke ennek: {szam1} (kerekits egeszre)? ")
+        if int(bekert) == eredmeny:
+            print("Ez az, helyes valasz!")
+        else:
+            print(f"Nem jo, a helyes egesz gyok: {eredmeny}")
     else:
-        print("Nem jo, ezt meg kell meg gyakorolni.")
+        print("Ilyen nehezseg nincs.")
 
 def info_task():
     kerdesek = [
