@@ -43,10 +43,12 @@ def math_task():
 
 def info_task():
     score = 0
-    rounds = 2
+    rounds = 3
     kerdesek = [
         ("Hany bit egy byte?", "8"),
-        ("Mi a kozponti feldolgozo egyseg roviditese?", "cpu")
+        ("Mi a kozponti feldolgozo egyseg roviditese?", "cpu"),
+        ("Mennyi a decimalis 2-es szam binaris alakja?", "10"),
+        ("Melyik logikai kapu ad hamis kimenetet csak akkor, ha mindket bemenete igaz (VAGY/ES/NAND)?", "nand")
     ]
     for _ in range(rounds):
         k = random.choice(kerdesek)
