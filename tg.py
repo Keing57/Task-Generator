@@ -7,7 +7,7 @@ def math_task():
         print("Valassz nehezseget:")
         print("1. Konnyu (osszeadas)")
         print("2. Kozep (szorzas)")
-        print("3. Nehez (gyokszamitas)")
+        print("3. Nehez (egyszeru egyenlet)")
         szint = input("Nehezseg (1-3): ")
         
         if szint == "1":
@@ -29,14 +29,16 @@ def math_task():
             else:
                 print("Nem jo, ezt meg kell meg gyakorolni.")
         elif szint == "3":
-            szam1 = random.randint(1, 100)
-            eredmeny = int(szam1 ** 0.5)
-            bekert = input(f"Mennyi a gyoke ennek: {szam1} (kerekits egeszre)? ")
-            if int(bekert) == eredmeny:
+            x = random.randint(1, 10)
+            a = random.randint(2, 5)
+            b = random.randint(1, 10)
+            c = a * x + b
+            bekert = input(f"Mennyi x erteke? {a}*x + {b} = {c} ")
+            if int(bekert) == x:
                 print("Ez az, helyes valasz!")
                 score += 1
             else:
-                print(f"Nem jo, a helyes egesz gyok: {eredmeny}")
+                print(f"Nem jo, a helyes x: {x}")
         else:
             print("Ilyen nehezseg nincs.")
     print(f"A jatek veget ert! A pontszamod: {score}/{rounds}")
