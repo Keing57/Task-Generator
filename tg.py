@@ -64,16 +64,21 @@ def info_task():
 
 def main():
     print("Feladatgeneralor elinditva...")
-    print("1. Matek")
-    print("2. Info")
-    valasztas = input("Valassz egy modot (1 vagy 2): ")
-    
-    if valasztas == "1":
-        math_task()
-    elif valasztas == "2":
-        info_task()
-    else:
-        print("Ilyen opcio nincsen.")
+    while True:
+        print("\n1. Matek")
+        print("2. Info")
+        print("3. Kilepes")
+        valasztas = input("Valassz egy modot (1-3): ")
+        
+        if valasztas == "1":
+            math_task()
+        elif valasztas == "2":
+            info_task()
+        elif valasztas == "3":
+            print("Viszlatan!")
+            break
+        else:
+            print("Ilyen opcio nincsen.")
 
 if __name__ == "__main__":
     main()
