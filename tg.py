@@ -8,7 +8,8 @@ def math_task():
         print("1. Konnyu (osszeadas)")
         print("2. Kozep (szorzas)")
         print("3. Nehez (egyszeru egyenlet)")
-        szint = input("Nehezseg (1-3): ")
+        print("4. Profi (hatvanyozas)")
+        szint = input("Nehezseg (1-4): ")
         
         if szint == "1":
             szam1 = random.randint(1, 20)
@@ -39,6 +40,16 @@ def math_task():
                 score += 1
             else:
                 print(f"Nem jo, a helyes x: {x}")
+        elif szint == "4":
+            alap = random.randint(2, 5)
+            kitevo = random.randint(2, 4)
+            eredmeny = alap ** kitevo
+            bekert = input(f"Mennyi {alap} a(z) {kitevo}. hatvanya? ")
+            if int(bekert) == eredmeny:
+                print("Ez az, helyes valasz!")
+                score += 1
+            else:
+                print(f"Nem jo, a helyes valasz: {eredmeny}")
         else:
             print("Ilyen nehezseg nincs.")
     print(f"A jatek veget ert! A pontszamod: {score}/{rounds}")
@@ -50,7 +61,8 @@ def info_task():
         ("Hany bit egy byte?", "8"),
         ("Mi a kozponti feldolgozo egyseg roviditese?", "cpu"),
         ("Mennyi a decimalis 2-es szam binaris alakja?", "10"),
-        ("Melyik logikai kapu ad hamis kimenetet csak akkor, ha mindket bemenete igaz (VAGY/ES/NAND)?", "nand")
+        ("Melyik logikai kapu ad hamis kimenetet csak akkor, ha mindket bemenete igaz (VAGY/ES/NAND)?", "nand"),
+        ("Hany bajt egy kilobajt a Szamitastechnikaban (1024 vagy 1000)?", "1024")
     ]
     for _ in range(rounds):
         k = random.choice(kerdesek)
