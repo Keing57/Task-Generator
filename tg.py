@@ -1,6 +1,10 @@
 import random
 
-def math_task():
+def save_result(name, mode, score, rounds):
+    with open("eredmenyek.txt", "a", encoding="utf-8") as f:
+        f.write(f"Nev: {name}, Mod: {mode}, Eredmeny: {score}/{rounds}\n")
+
+def math_task(name):
     score = 0
     rounds = 3
     for _ in range(rounds):
@@ -53,8 +57,9 @@ def math_task():
         else:
             print("Ilyen nehezseg nincs.")
     print(f"A jatek veget ert! A pontszamod: {score}/{rounds}")
+    save_result(name, "Matek", score, rounds)
 
-def info_task():
+def info_task(name):
     score = 0
     rounds = 3
     kerdesek = [
@@ -73,19 +78,22 @@ def info_task():
         else:
             print("Nem talalt, a helyes valasz: " + k[1])
     print(f"Az info kor veget ert! Pontszam: {score}/{rounds}")
+    save_result(name, "Info", score, rounds)
 
 def main():
     print("Feladatgeneralor elinditva...")
+    name = input("Add meg a nevedet, kerlek: ")
     while True:
-        print("\n1. Matek")
+        print(f"\nUdv, {name}! Valassz modot:")
+        print("1. Matek")
         print("2. Info")
         print("3. Kilepes")
         valasztas = input("Valassz egy modot (1-3): ")
         
         if valasztas == "1":
-            math_task()
+            math_task(name)
         elif valasztas == "2":
-            info_task()
+            info_task(name)
         elif valasztas == "3":
             print("Viszlatan!")
             break
