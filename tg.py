@@ -4,6 +4,19 @@ def save_result(name, mode, score, rounds):
     with open("eredmenyek.txt", "a", encoding="utf-8") as f:
         f.write(f"Nev: {name}, Mod: {mode}, Eredmeny: {score}/{rounds}\n")
 
+def show_results():
+    print("\n--- EDDIGI EREDMENYEK ---")
+    try:
+        with open("eredmenyek.txt", "r", encoding="utf-8") as f:
+            content = f.read()
+            if content.strip() == "":
+                print("Meg nincsenek mentesek.")
+            else:
+                print(content)
+    except FileNotFoundError:
+        print("Meg nincs eredmenyek fajl.")
+    print("-------------------------")
+
 def math_task(name):
     score = 0
     rounds = 3
@@ -87,14 +100,17 @@ def main():
         print(f"\nUdv, {name}! Valassz modot:")
         print("1. Matek")
         print("2. Info")
-        print("3. Kilepes")
-        valasztas = input("Valassz egy modot (1-3): ")
+        print("3. Eredmenyek megtekintese")
+        print("4. Kilepes")
+        valasztas = input("Valassz egy opciot (1-4): ")
         
         if valasztas == "1":
             math_task(name)
         elif valasztas == "2":
             info_task(name)
         elif valasztas == "3":
+            show_results()
+        elif valasztas == "4":
             print("Viszlatan!")
             break
         else:
