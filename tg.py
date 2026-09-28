@@ -80,7 +80,9 @@ def info_task(name):
         ("Mi a kozponti feldolgozo egyseg roviditese?", "cpu"),
         ("Mennyi a decimalis 2-es szam binaris alakja?", "10"),
         ("Melyik logikai kapu ad hamis kimenetet csak akkor, ha mindket bemenete igaz (VAGY/ES/NAND)?", "nand"),
-        ("Hany bajt egy kilobajt a Szamitastechnikaban (1024 vagy 1000)?", "1024")
+        ("Hany bajt egy kilobajt a Szamitastechnikaban (1024 vagy 1000)?", "1024"),
+        ("Milyen programozasi szerkezet hajt vegre utasitas-sorozatot ismetelten (feltetel alapjan)?", "ciklus"),
+        ("Mi a neve annak a programozasi elemnek, ami adatokat tarol es nevet kap a memoriaban?", "valtozo")
     ]
     for _ in range(rounds):
         k = random.choice(kerdesek)
