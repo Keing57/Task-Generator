@@ -1,122 +1,130 @@
 import random
 
-def save_result(name, mode, score, rounds):
-    with open("eredmenyek.txt", "a", encoding="utf-8") as f:
-        f.write(f"Nev: {name}, Mod: {mode}, Eredmeny: {score}/{rounds}\n")
+class ProblemGenerator:
+    def __init__(self):
+        self.filename = "eredmenyek.txt"
 
-def show_results():
-    print("\n--- EDDIGI EREDMENYEK ---")
-    try:
-        with open("eredmenyek.txt", "r", encoding="utf-8") as f:
-            content = f.read()
-            if content.strip() == "":
-                print("Meg nincsenek mentesek.")
-            else:
-                print(content)
-    except FileNotFoundError:
-        print("Meg nincs eredmenyek fajl.")
-    print("-------------------------")
+    def save_result(self, name, mode, score, rounds):
+        with open(self.filename, "a", encoding="utf-8") as f:
+            f.write(f"Nev: {name}, Mod: {mode}, Eredmeny: {score}/{rounds}\n")
 
-def math_task(name):
-    score = 0
-    rounds = 3
-    for _ in range(rounds):
-        print("Valassz nehezseget:")
-        print("1. Konnyu (osszeadas)")
-        print("2. Kozep (szorzas)")
-        print("3. Nehez (egyszeru egyenlet)")
-        print("4. Profi (hatvanyozas)")
-        szint = input("Nehezseg (1-4): ")
-        
-        if szint == "1":
-            szam1 = random.randint(1, 20)
-            szam2 = random.randint(1, 20)
-            bekert = input(f"Mennyi {szam1} + {szam2}? ")
-            if int(bekert) == szam1 + szam2:
-                print("Ez az, helyes valasz!")
-                score += 1
-            else:
-                print("Nem jo, ezt meg kell meg gyakorolni.")
-        elif szint == "2":
-            szam1 = random.randint(2, 10)
-            szam2 = random.randint(2, 10)
-            bekert = input(f"Mennyi {szam1} * {szam2}? ")
-            if int(bekert) == szam1 * szam2:
-                print("Ez az, helyes valasz!")
-                score += 1
-            else:
-                print("Nem jo, ezt meg kell meg gyakorolni.")
-        elif szint == "3":
-            x = random.randint(1, 10)
-            a = random.randint(2, 5)
-            b = random.randint(1, 10)
-            c = a * x + b
-            bekert = input(f"Mennyi x erteke? {a}*x + {b} = {c} ")
-            if int(bekert) == x:
-                print("Ez az, helyes valasz!")
-                score += 1
-            else:
-                print(f"Nem jo, a helyes x: {x}")
-        elif szint == "4":
-            alap = random.randint(2, 5)
-            kitevo = random.randint(2, 4)
-            eredmeny = alap ** kitevo
-            bekert = input(f"Mennyi {alap} a(z) {kitevo}. hatvanya? ")
-            if int(bekert) == eredmeny:
-                print("Ez az, helyes valasz!")
-                score += 1
-            else:
-                print(f"Nem jo, a helyes valasz: {eredmeny}")
-        else:
-            print("Ilyen nehezseg nincs.")
-    print(f"A jatek veget ert! A pontszamod: {score}/{rounds}")
-    save_result(name, "Matek", score, rounds)
+    def show_results(self):
+        print("\n--- EDDIGI EREDMENYEK ---")
+        try:
+            with open(self.filename, "r", encoding="utf-8") as f:
+                content = f.read()
+                if content.strip() == "":
+                    print("Meg nincsenek mentesek.")
+                else:
+                    print(content)
+        except FileNotFoundError:
+            print("Meg nincs eredmenyek fajl.")
+        print("-------------------------")
 
-def info_task(name):
-    score = 0
-    rounds = 3
-    kerdesek = [
-        ("Hany bit egy byte?", "8"),
-        ("Mi a kozponti feldolgozo egyseg roviditese?", "cpu"),
-        ("Mennyi a decimalis 2-es szam binaris alakja?", "10"),
-        ("Melyik logikai kapu ad hamis kimenetet csak akkor, ha mindket bemenete igaz (VAGY/ES/NAND)?", "nand"),
-        ("Hany bajt egy kilobajt a Szamitastechnikaban (1024 vagy 1000)?", "1024"),
-        ("Milyen programozasi szerkezet hajt vegre utasitas-sorozatot ismetelten (feltetel alapjan)?", "ciklus"),
-        ("Mi a neve annak a programozasi elemnek, ami adatokat tarol es nevet kap a memoriaban?", "valtozo")
-    ]
-    for _ in range(rounds):
-        k = random.choice(kerdesek)
-        bekert = input(f"Informatika kerdes: {k[0]} ")
-        if bekert.strip().lower() == k[1]:
-            print("Tokeletes, ugyes vagy!")
-            score += 1
-        else:
-            print("Nem talalt, a helyes valasz: " + k[1])
-    print(f"Az info kor veget ert! Pontszam: {score}/{rounds}")
-    save_result(name, "Info", score, rounds)
+    def math_task(self, name):
+        score = 0
+        rounds = 3
+        for _ in range(rounds):
+            print("Valassz nehezseget:")
+            print("1. Konnyu (osszeadas)")
+            print("2. Kozep (szorzas)")
+            print("3. Nehez (egyszeru egyenlet)")
+            print("4. Profi (hatvanyozas)")
+            szint = input("Nehezseg (1-4): ")
+            
+            if szint == "1":
+                szam1 = random.randint(1, 20)
+                szam2 = random.randint(1, 20)
+                bekert = input(f"Mennyi {szam1} + {szam2}? ")
+                if int(bekert) == szam1 + szam2:
+                    print("Ez az, helyes valasz!")
+                    score += 1
+                else:
+                    print("Nem jo, ezt meg kell meg gyakorolni.")
+            elif szint == "2":
+                szam1 = random.randint(2, 10)
+                szam2 = random.randint(2, 10)
+                bekert = input(f"Mennyi {szam1} * {szam2}? ")
+                if int(bekert) == szam1 * szam2:
+                    print("Ez az, helyes valasz!")
+                    score += 1
+                else:
+                    print("Nem jo, ezt meg kell meg gyakorolni.")
+            elif szint == "3":
+                x = random.randint(1, 10)
+                a = random.randint(2, 5)
+                b = random.randint(1, 10)
+                c = a * x + b
+                bekert = input(f"Mennyi x erteke? {a}*x + {b} = {c} ")
+                if int(bekert) == x:
+                    print("Ez az, helyes valasz!")
+                    score += 1
+                else:
+                    print(f"Nem jo, a helyes x: {x}")
+            elif szint == "4":
+                alap = random.randint(2, 5)
+                kitevo = random.randint(2, 4)
+                eredmeny = alap ** kitevo
+                bekert = input(f"Mennyi {alap} a(z) {kitevo}. hatvanya? ")
+                if int(bekert) == eredmeny:
+                    print("Ez az, helyes valasz!")
+                    score += 1
+                else:
+                    print(f"Nem jo, a helyes valasz: {eredmeny}")
+            else:
+                print("Ilyen nehezseg nincs.")
+        print(f"A jatek veget ert! A pontszamod: {score}/{rounds}")
+        self.save_result(name, "Matek", score, rounds)
+
+    def info_task(self, name):
+        score = 0
+        rounds = 3
+        kerdesek = [
+            ("Hany bit egy byte?", "8"),
+            ("Mi a kozponti feldolgozo egyseg roviditese?", "cpu"),
+            ("Mennyi a decimalis 2-es szam binaris alakja?", "10"),
+            ("Melyik logikai kapu ad hamis kimenetet csak akkor, ha mindket bemenete igaz (VAGY/ES/NAND)?", "nand"),
+            ("Hany bajt egy kilobajt a Szamitastechnikaban (1024 vagy 1000)?", "1024"),
+            ("Milyen programozasi szerkezet hajt vegre utasitas-sorozatot ismetelten (feltetel alapjan)?", "ciklus"),
+            ("Mi a neve annak a programozasi elemnek, ami adatokat tarol es nevet kap a memoriaban?", "valtozo")
+        ]
+        for _ in range(rounds):
+            k = random.choice(kerdesek)
+            bekert = input(f"Informatika kerdes: {k[0]} ")
+            if bekert.strip().lower() == k[1]:
+                print("Tokeletes, ugyes vagy!")
+                score += 1
+            else:
+                print("Nem talalt, a helyes valasz: " + k[1])
+        print(f"Az info kor veget ert! Pontszam: {score}/{rounds}")
+        self.save_result(name, "Info", score, rounds)
+
+    def run(self):
+        print("Feladatgeneralor elinditva...")
+        name = input("Add meg a nevedet, kerlek: ")
+        while True:
+            print(f"\nUdv, {name}! Valassz modot:")
+            print("1. Matek")
+            print("2. Info")
+            print("3. Eredmenyek megtekintese")
+            print("4. Kilepes")
+            valasztas = input("Valassz egy opciot (1-4): ")
+            
+            if valasztas == "1":
+                self.math_task(name)
+            elif valasztas == "2":
+                self.info_task(name)
+            elif valasztas == "3":
+                self.show_results()
+            elif valasztas == "4":
+                print("Viszlatan!")
+                break
+            else:
+                print("Ilyen opcio nincsen.")
 
 def main():
-    print("Feladatgeneralor elinditva...")
-    name = input("Add meg a nevedet, kerlek: ")
-    while True:
-        print(f"\nUdv, {name}! Valassz modot:")
-        print("1. Matek")
-        print("2. Info")
-        print("3. Eredmenyek megtekintese")
-        print("4. Kilepes")
-        valasztas = input("Valassz egy opciot (1-4): ")
-        
-        if valasztas == "1":
-            math_task(name)
-        elif valasztas == "2":
-            info_task(name)
-        elif valasztas == "3":
-            show_results()
-        elif valasztas == "4":
-            print("Viszlatan!")
-            break
-        else:
-            print("Ilyen opcio nincsen.")
+    app = ProblemGenerator()
+    app.run()
 
 if __name__ == "__main__":
     main()
