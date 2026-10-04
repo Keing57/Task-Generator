@@ -30,47 +30,73 @@ class ProblemGenerator:
             print("2. Kozep (szorzas)")
             print("3. Nehez (egyszeru egyenlet)")
             print("4. Profi (hatvanyozas)")
-            szint = input("Nehezseg (1-4): ")
+            print("5. Mester (szazalekszamitas)")
+            szint = input("Nehezseg (1-5): ")
             
             if szint == "1":
                 szam1 = random.randint(1, 20)
                 szam2 = random.randint(1, 20)
                 bekert = input(f"Mennyi {szam1} + {szam2}? ")
-                if int(bekert) == szam1 + szam2:
-                    print("Ez az, helyes valasz!")
-                    score += 1
-                else:
-                    print("Nem jo, ezt meg kell meg gyakorolni.")
+                try:
+                    if int(bekert) == szam1 + szam2:
+                        print("Ez az, helyes valasz!")
+                        score += 1
+                    else:
+                        print("Nem jo, ezt meg kell meg gyakorolni.")
+                except ValueError:
+                    print("Ez nem is szam volt!")
             elif szint == "2":
                 szam1 = random.randint(2, 10)
                 szam2 = random.randint(2, 10)
                 bekert = input(f"Mennyi {szam1} * {szam2}? ")
-                if int(bekert) == szam1 * szam2:
-                    print("Ez az, helyes valasz!")
-                    score += 1
-                else:
-                    print("Nem jo, ezt meg kell meg gyakorolni.")
+                try:
+                    if int(bekert) == szam1 * szam2:
+                        print("Ez az, helyes valasz!")
+                        score += 1
+                    else:
+                        print("Nem jo, ezt meg kell meg gyakorolni.")
+                except ValueError:
+                    print("Ez nem is szam volt!")
             elif szint == "3":
                 x = random.randint(1, 10)
                 a = random.randint(2, 5)
                 b = random.randint(1, 10)
                 c = a * x + b
                 bekert = input(f"Mennyi x erteke? {a}*x + {b} = {c} ")
-                if int(bekert) == x:
-                    print("Ez az, helyes valasz!")
-                    score += 1
-                else:
-                    print(f"Nem jo, a helyes x: {x}")
+                try:
+                    if int(bekert) == x:
+                        print("Ez az, helyes valasz!")
+                        score += 1
+                    else:
+                        print(f"Nem jo, a helyes x: {x}")
+                except ValueError:
+                    print("Ez nem is szam volt!")
             elif szint == "4":
                 alap = random.randint(2, 5)
                 kitevo = random.randint(2, 4)
                 eredmeny = alap ** kitevo
                 bekert = input(f"Mennyi {alap} a(z) {kitevo}. hatvanya? ")
-                if int(bekert) == eredmeny:
-                    print("Ez az, helyes valasz!")
-                    score += 1
-                else:
-                    print(f"Nem jo, a helyes valasz: {eredmeny}")
+                try:
+                    if int(bekert) == eredmeny:
+                        print("Ez az, helyes valasz!")
+                        score += 1
+                    else:
+                        print(f"Nem jo, a helyes valasz: {eredmeny}")
+                except ValueError:
+                    print("Ez nem is szam volt!")
+            elif szint == "5":
+                alap_szam = random.choice([50, 100, 200, 300, 400, 500])
+                szazalek = random.choice([10, 20, 25, 50])
+                eredmeny = int(alap_szam * szazalek / 100)
+                bekert = input(f"Mennyi {szazalek}%-a ennek: {alap_szam}? ")
+                try:
+                    if int(bekert) == eredmeny:
+                        print("Ez az, helyes valasz!")
+                        score += 1
+                    else:
+                        print(f"Nem jo, a helyes valasz: {eredmeny}")
+                except ValueError:
+                    print("Ez nem is szam volt!")
             else:
                 print("Ilyen nehezseg nincs.")
         print(f"A jatek veget ert! A pontszamod: {score}/{rounds}")
