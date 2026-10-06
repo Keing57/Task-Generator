@@ -21,6 +21,10 @@ class ProblemGenerator:
             print("Meg nincs eredmenyek fajl.")
         print("-------------------------")
 
+    def clear_results(self):
+        open(self.filename, "w", encoding="utf-8").close()
+        print("Eredmenyek torolve!")
+
     def math_task(self, name):
         score = 0
         rounds = 3
@@ -112,7 +116,9 @@ class ProblemGenerator:
             ("Melyik logikai kapu ad hamis kimenetet csak akkor, ha mindket bemenete igaz (VAGY/ES/NAND)?", "nand"),
             ("Hany bajt egy kilobajt a Szamitastechnikaban (1024 vagy 1000)?", "1024"),
             ("Milyen programozasi szerkezet hajt vegre utasitas-sorozatot ismetelten (feltetel alapjan)?", "ciklus"),
-            ("Mi a neve annak a programozasi elemnek, ami adatokat tarol es nevet kap a memoriaban?", "valtozo")
+            ("Mi a neve annak a programozasi elemnek, ami adatokat tarol es nevet kap a memoriaban?", "valtozo"),
+            ("Milyen eszkoz kot ossze kulonbozo halozatokat (pl. az otthoni halozatot az internettel)?", "router"),
+            ("Mi a helyi halozatok roviditese (angol betuwo)?", "lan")
         ]
         for _ in range(rounds):
             k = random.choice(kerdesek)
@@ -133,8 +139,9 @@ class ProblemGenerator:
             print("1. Matek")
             print("2. Info")
             print("3. Eredmenyek megtekintese")
-            print("4. Kilepes")
-            valasztas = input("Valassz egy opciot (1-4): ")
+            print("4. Eredmenyek torlese")
+            print("5. Kilepes")
+            valasztas = input("Valassz egy opciot (1-5): ")
             
             if valasztas == "1":
                 self.math_task(name)
@@ -143,6 +150,8 @@ class ProblemGenerator:
             elif valasztas == "3":
                 self.show_results()
             elif valasztas == "4":
+                self.clear_results()
+            elif valasztas == "5":
                 print("Viszlatan!")
                 break
             else:
