@@ -109,18 +109,37 @@ class ProblemGenerator:
     def info_task(self, name):
         score = 0
         rounds = 3
-        kerdesek = [
-            ("Hany bit egy byte?", "8"),
-            ("Mi a kozponti feldolgozo egyseg roviditese?", "cpu"),
-            ("Mennyi a decimalis 2-es szam binaris alakja?", "10"),
-            ("Melyik logikai kapu ad hamis kimenetet csak akkor, ha mindket bemenete igaz (VAGY/ES/NAND)?", "nand"),
-            ("Hany bajt egy kilobajt a Szamitastechnikaban (1024 vagy 1000)?", "1024"),
-            ("Milyen programozasi szerkezet hajt vegre utasitas-sorozatot ismetelten (feltetel alapjan)?", "ciklus"),
-            ("Mi a neve annak a programozasi elemnek, ami adatokat tarol es nevet kap a memoriaban?", "valtozo"),
-            ("Milyen eszkoz kot ossze kulonbozo halozatokat (pl. az otthoni halozatot az internettel)?", "router"),
-            ("Mi a helyi halozatok roviditese (angol betuwo)?", "lan")
-        ]
+        print("Valassz infotematikat:")
+        print("1. Hardver es Adatmennyiseg")
+        print("2. Logika es Binaris")
+        print("3. Programozas es Halozatok")
+        tema = input("Tema (1-3): ")
+        
+        if tema == "1":
+            kerdesek = [
+                ("Hany bit egy byte?", "8"),
+                ("Mi a kozponti feldolgozo egyseg roviditese?", "cpu"),
+                ("Hany bajt egy kilobajt a Szamitastechnikaban (1024 vagy 1000)?", "1024")
+            ]
+        elif tema == "2":
+            kerdesek = [
+                ("Mennyi a decimalis 2-es szam binaris alakja?", "10"),
+                ("Melyik logikai kapu ad hamis kimenetet csak akkor, ha mindket bemenete igaz (VAGY/ES/NAND)?", "nand")
+            ]
+        elif tema == "3":
+            kerdesek = [
+                ("Milyen programozasi szerkezet hajt vegre utasitas-sorozatot ismetelten (feltetel alapjan)?", "ciklus"),
+                ("Mi a neve annak a programozasi elemnek, ami adatokat tarol es nevet kap a memoriaban?", "valtozo"),
+                ("Milyen eszkoz kot ossze kulonbozo halozatokat (pl. az otthoni halozatot az internettel)?", "router"),
+                ("Mi a helyi halozatok roviditese (angol betuwo)?", "lan")
+            ]
+        else:
+            print("Nincs ilyen tema, kapkodsz az alapbol...")
+            kerdesek = [("Hany bit egy byte?", "8")]
+
         for _ in range(rounds):
+            if not kerdesek:
+                break
             k = random.choice(kerdesek)
             bekert = input(f"Informatika kerdes: {k[0]} ")
             if bekert.strip().lower() == k[1]:
