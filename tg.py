@@ -25,6 +25,14 @@ class ProblemGenerator:
         open(self.filename, "w", encoding="utf-8").close()
         print("Eredmenyek torolve!")
 
+    def is_prime(self, n):
+        if n < 2:
+            return False
+        for i in range(2, int(n**0.5) + 1):
+            if n % i == 0:
+                return False
+        return True
+
     def math_task(self, name):
         score = 0
         rounds = 3
@@ -35,7 +43,8 @@ class ProblemGenerator:
             print("3. Nehez (egyszeru egyenlet)")
             print("4. Profi (hatvanyozas)")
             print("5. Mester (szazalekszamitas)")
-            szint = input("Nehezseg (1-5): ")
+            print("6. Mesterelmok (prim-e szam)")
+            szint = input("Nehezseg (1-6): ")
             
             if szint == "1":
                 szam1 = random.randint(1, 20)
@@ -101,6 +110,15 @@ class ProblemGenerator:
                         print(f"Nem jo, a helyes valasz: {eredmeny}")
                 except ValueError:
                     print("Ez nem is szam volt!")
+            elif szint == "6":
+                szam = random.randint(2, 50)
+                helyes = "igen" if self.is_prime(szam) else "nem"
+                bekert = input(f"Primszam-e a(z) {szam}? (igen/nem): ")
+                if bekert.strip().lower() == helyes:
+                    print("Ez az, helyes valasz!")
+                    score += 1
+                else:
+                    print(f"Nem jo, a helyes valasz: {helyes}")
             else:
                 print("Ilyen nehezseg nincs.")
         print(f"A jatek veget ert! A pontszamod: {score}/{rounds}")
