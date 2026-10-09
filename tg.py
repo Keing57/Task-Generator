@@ -21,6 +21,34 @@ class ProblemGenerator:
             print("Meg nincs eredmenyek fajl.")
         print("-------------------------")
 
+    def show_statistics(self):
+        print("\n--- STATISZTIKA ---")
+        try:
+            with open(self.filename, "r", encoding="utf-8") as f:
+                lines = f.readlines()
+                if not lines:
+                    print("Még nincsenek adatok a statisztikához.")
+                    print("-------------------")
+                    return
+                
+                total_games = len(lines)
+                total_score = 0
+                total_rounds = 0
+                
+                for line in lines:
+                    if "Eredmeny:" in line:
+                        parts = line.split("Eredmeny: ")[1].strip().split("/")
+                        total_score += int(parts[0])
+                        total_rounds += int(parts[1])
+                        
+                avg_percentage = (total_score / total_rounds) * 100 if total_rounds > 0 else 0
+                print(f"Összes lejátszott kör: {total_games}")
+                print(f"Összes elért pont: {total_score}/{total_rounds}")
+                print(f"Átlagos teljesítmény: {avg_percentage:.1f}%")
+        except FileNotFoundError:
+            print("Meg nincs eredmenyek fajl.")
+        print("-------------------")
+
     def clear_results(self):
         open(self.filename, "w", encoding="utf-8").close()
         print("Eredmenyek torolve!")
@@ -176,9 +204,10 @@ class ProblemGenerator:
             print("1. Matek")
             print("2. Info")
             print("3. Eredmenyek megtekintese")
-            print("4. Eredmenyek torlese")
-            print("5. Kilepes")
-            valasztas = input("Valassz egy opciot (1-5): ")
+            print("4. Statisztika")
+            print("5. Eredmenyek torlese")
+            print("6. Kilepes")
+            valasztas = input("Valassz egy opciot (1-6): ")
             
             if valasztas == "1":
                 self.math_task(name)
@@ -187,8 +216,10 @@ class ProblemGenerator:
             elif valasztas == "3":
                 self.show_results()
             elif valasztas == "4":
-                self.clear_results()
+                self.show_statistics()
             elif valasztas == "5":
+                self.clear_results()
+            elif valasztas == "6":
                 print("Viszlatan!")
                 break
             else:
