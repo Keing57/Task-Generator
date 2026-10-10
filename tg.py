@@ -6,17 +6,47 @@ class ProblemGenerator:
 
     def save_result(self, name, mode, score, rounds):
         with open(self.filename, "a", encoding="utf-8") as f:
-            f.write(f"Nev: {name}, Mod: {mode}, Eredmeny: {score}/{rounds}\n")
+            f.write(f"{name};{mode};{score};{rounds}\n")
 
     def show_results(self):
         print("\n--- EDDIGI EREDMENYEK ---")
         try:
             with open(self.filename, "r", encoding="utf-8") as f:
-                content = f.read()
-                if content.strip() == "":
+                lines = f.readlines()
+                if not lines:
                     print("Meg nincsenek mentesek.")
                 else:
-                    print(content)
+                    for line in lines:
+                        parts = line.strip().split(";")
+                        if len(parts) == 4:
+                            print(f"Nev: {parts[0]} | Mod: {parts[1]} | Eredmeny: {parts[2]}/{parts[3]}")
+                        else:
+                            print(line.strip())
+        except FileNotFoundError:
+            print("Meg nincs eredmenyek fajl.")
+        print("-------------------------")
+
+    def show_leaderboard(self):
+        print("\n--- TOP DICSOSÉGTÁBLA ---")
+        try:
+            with open(self.filename, "r", encoding="utf-8") as f:
+                lines = f.readlines()
+                if not lines:
+                    print("Még nincsenek adatok a ranglistához.")
+                    print("-------------------------")
+                    return
+                
+                entries = []
+                for line in lines:
+                    parts = line.strip().split(";")
+                    if len(parts) == 4:
+                        name, mode, score, rounds = parts
+                        entries.append((name, mode, int(score), int(rounds)))
+                
+                entries.sort(key=lambda x: x[2], reverse=True)
+                
+                for i, entry in enumerate(entries[:5], 1):
+                    print(f"{i}. {entry[0]} ({entry[1]}) - Pont: {entry[2]}/{entry[3]}")
         except FileNotFoundError:
             print("Meg nincs eredmenyek fajl.")
         print("-------------------------")
@@ -36,10 +66,10 @@ class ProblemGenerator:
                 total_rounds = 0
                 
                 for line in lines:
-                    if "Eredmeny:" in line:
-                        parts = line.split("Eredmeny: ")[1].strip().split("/")
-                        total_score += int(parts[0])
-                        total_rounds += int(parts[1])
+                    parts = line.strip().split(";")
+                    if len(parts) == 4:
+                        total_score += int(parts[2])
+                        total_rounds += int(parts[3])
                         
                 avg_percentage = (total_score / total_rounds) * 100 if total_rounds > 0 else 0
                 print(f"Összes lejátszott kör: {total_games}")
@@ -165,7 +195,7 @@ class ProblemGenerator:
             kerdesek = [
                 ("Hany bit egy byte?", "8"),
                 ("Mi a kozponti feldolgozo egyseg roviditese?", "cpu"),
-                ("Hany bajt egy kilobajt a Szamitastechnikaban (1024 vagy 1000)?", "1024")
+                ("Hany bajt egy kilobajt a Szamitastechnikaban (1024 vagy 000)?", "1024")
             ]
         elif tema == "2":
             kerdesek = [
@@ -204,10 +234,11 @@ class ProblemGenerator:
             print("1. Matek")
             print("2. Info")
             print("3. Eredmenyek megtekintese")
-            print("4. Statisztika")
-            print("5. Eredmenyek torlese")
-            print("6. Kilepes")
-            valasztas = input("Valassz egy opciot (1-6): ")
+            print("4. Top Ranglista")
+            print("5. Statisztika")
+            print("6. Eredmenyek torlese")
+            print("7. Kilepes")
+            valasztas = input("Valassz egy opciot (1-7): ")
             
             if valasztas == "1":
                 self.math_task(name)
@@ -216,11 +247,13 @@ class ProblemGenerator:
             elif valasztas == "3":
                 self.show_results()
             elif valasztas == "4":
-                self.show_statistics()
+                self.show_leaderboard()
             elif valasztas == "5":
-                self.clear_results()
+                self.show_statistics()
             elif valasztas == "6":
-                print("Viszlatan!")
+                self.clear_results()
+            elif valasztas == "7":
+                print("Viszlat!")
                 break
             else:
                 print("Ilyen opcio nincsen.")
